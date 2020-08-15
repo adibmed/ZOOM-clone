@@ -1,5 +1,4 @@
 
-
 const socket = io('/')
 const videoGrid = document.getElementById("video-grid") 
 const myVideo = document.createElement('video')
@@ -12,13 +11,8 @@ var peer = new Peer(undefined, {
     host: '/',
     port: '3333'
   })
-
-// = new Peer(undefined, {
-//   path: '/peerjs',
-//   host: '/',
-//   port: '443'
-// })
-
+ 
+ 
 let myVideoStream
 navigator.mediaDevices.getUserMedia({
     video: true,
@@ -73,4 +67,10 @@ $('html').keydown((e) => {
         socket.emit('message', text.val());
         text.val('')
     }
+})
+
+console.log("🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 ")
+
+socket.on('createMessage', message => {
+    console.log("Back message👉 ", message)
 })
