@@ -33,6 +33,22 @@ navigator.mediaDevices.getUserMedia({
         connectToNewUser(userId, stream)
     })
 
+
+
+    let text = $('input')  
+
+    $('html').keydown((e) => {
+        if(e.which == 13 && text.val().length !== 0) { 
+            socket.emit('message', text.val());
+            text.val('')
+        }
+    })
+    
+
+    socket.on('createMessage', message => {
+    $('.messages').append(`<li class="message"><b>user</b>${message}</li>`)
+    })
+
 })
  
 // Listen on peer connection
@@ -58,19 +74,7 @@ const addVideoStream = (video, stream) => {
    videoGrid.append(video) 
 }
 
-
-let text = $('input')  
-
-$('html').keydown((e) => {
-    if(e.which == 13 && text.val().length !== 0) {
-        console.log(text.val())
-        socket.emit('message', text.val());
-        text.val('')
-    }
-})
-
-console.log("🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 ")
-
-socket.on('createMessage', message => {
-    console.log("Back message👉 ", message)
-})
+const scrollToBottom = () => {
+    var d = $('.main_chat_window')
+    d.scrollTo(d.prop('scrollHeight'))
+}
